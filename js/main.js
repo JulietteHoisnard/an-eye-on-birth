@@ -18,6 +18,40 @@
   });
 })();
 
+// Photography dropdown — trigger toggles the submenu
+(function () {
+  const dropdown = document.querySelector('.nav-dropdown');
+  if (!dropdown) return;
+
+  const trigger = dropdown.querySelector('.nav-dropdown-trigger');
+  if (!trigger) return;
+
+  function toggleDropdown(force) {
+    const isOpen = force !== undefined ? force : !dropdown.classList.contains('open');
+    dropdown.classList.toggle('open', isOpen);
+    trigger.setAttribute('aria-expanded', isOpen);
+  }
+
+  // Clicking the trigger (Photography + arrow) toggles the menu
+  trigger.addEventListener('click', (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    toggleDropdown();
+  });
+
+  // Close when clicking outside
+  document.addEventListener('click', (e) => {
+    if (!dropdown.contains(e.target)) {
+      toggleDropdown(false);
+    }
+  });
+
+  // Close on Escape
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') toggleDropdown(false);
+  });
+})();
+
 // Lightbox
 (function () {
   const overlay = document.getElementById('lightbox-overlay');
