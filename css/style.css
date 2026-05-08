@@ -64,7 +64,7 @@ img {
   white-space: nowrap;
 }
 
-.nav-logo span {
+.nav-logo span:last-child {
   font-style: italic;
   font-weight: 300;
 }
@@ -100,6 +100,21 @@ img {
 .nav-links > li > a.active {
   color: #8a6e52;
 }
+
+/* .nav-contact-link {
+  background: transparent;
+  color: #fff !important;
+  background: #8a6e52 !important;
+  border-radius: 999px;
+  padding: 0.4rem 1.1rem !important;
+  transition: background 0.2s, color 0.2s !important;
+}
+
+.nav-contact-link:hover,
+.nav-contact-link.active {
+  background: #8a6e52 !important;
+  color: #fff !important;
+} */
 
 /* Dropdown */
 .nav-dropdown {
@@ -551,15 +566,16 @@ img {
 
 .service-card-label {
   color: #fff;
-  font-size: clamp(1rem, 2.5vw, 1.5rem);
+  font-size: 1rem;
   letter-spacing: 0.18em;
   text-transform: uppercase;
   font-weight: 300;
   text-align: center;
   text-shadow: 0 1px 6px rgba(0,0,0,0.4);
   border: 1px solid rgba(255,255,255,0.6);
-  padding: 0.6rem 1.4rem;
+  padding: 0.6rem 1.8rem;
   transition: border-color 0.3s;
+  border-radius: 999px;
 }
 
 .service-card:hover .service-card-label {
@@ -953,7 +969,7 @@ img {
   font-size: clamp(1.6rem, 3vw, 2.2rem);
   font-weight: 300;
   letter-spacing: 0.06em;
-  margin-bottom: 0.5rem;
+  margin-bottom: 2rem;
   color: #2c2c2c;
 }
 
@@ -1236,6 +1252,17 @@ img {
 /* =============================================
    RESPONSIVE
    ============================================= */
+@media (max-width: 1215px) {
+  .nav-logo span:first-of-type {
+    font-size: 0;
+    width: 0;
+    display:inline-block;
+    overflow: hidden;
+    padding: 0;
+    margin: 0;
+  }
+}
+
 @media (max-width: 900px) {
   .home-intro-inner {
     grid-template-columns: 220px 1fr;
@@ -1247,7 +1274,7 @@ img {
   }
 
   .home-doula-image {
-    order: -1;
+    order: 1;
     max-width: 480px;
     margin: 0 auto;
     width: 100%;
@@ -1271,7 +1298,7 @@ img {
   }
 }
 
-@media (max-width: 680px) {
+@media (max-width: 950px) {
   .home-hero {
     min-height: 70vh;
     padding: 4rem 1.2rem 3rem;
