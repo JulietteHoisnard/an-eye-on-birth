@@ -139,14 +139,29 @@
       <a href="https://www.instagram.com/an.eye.on.birth/" target="_blank" rel="noopener" aria-label="Instagram">
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
       </a>
-      <a href="" aria-label="Email">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
-      </a>
+      <script type="text/javascript">
+      { coded = "YdQZEZ22Z@PQ0gd.clQ"
+        key = "f6oPz1EAn79W2xay4YvFGlIeSwCiqTJVU0B83DhmduZkbXgHKrtNROKsLMQpj5"
+        shift=coded.length
+        link=""
+        for (i=0; i<coded.length; i++) {
+          if (key.indexOf(coded.charAt(i))==-1) {
+            ltr = coded.charAt(i)
+            link += (ltr)
+          }
+          else {
+            ltr = (key.indexOf(coded.charAt(i))-shift+key.length) % key.length
+            link += (key.charAt(ltr))
+          }
+        }
+        document.write("<a href='mailto:"+link+"' aria-label='Email'><svg width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><path d='M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z'/><polyline points='22,6 12,13 2,6'/></svg></a>")
+      }
+      </script><noscript><a href="" aria-label="Email"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></a></noscript>
     </div>
     <span>Copyright &copy; 2026 All rights reserved by Julie Meresse</span>
     <nav class="site-footer-links">
       <a href="impressum.html">Impressum</a>
-      <a href="legal-notice.html">Legal Notice</a>
+      <a href="datenschutz.html">Datenschutzerklärung</a>
     </nav>
   </footer>
 
