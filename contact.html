@@ -39,7 +39,7 @@
   <!-- CONTENT -->
   <main>
     <section class="contact-section" id="contact">
-      <h2>I would love to hear from you!</h2>
+      <h2>Let's get in touch!</h2>
 
       <form class="contact-form" id="contact-form" novalidate>
 
@@ -73,10 +73,13 @@
 
         <label class="form-disclaimer">
           <input type="checkbox" name="disclaimer" required />
-          I am inquiring about doula services and understand that doulas are not midwives or medical providers.
+          I am aware and understand that doulas are not medical providers and do not replace prenatal care, medical advice, or emergency services.
         </label>
 
         <button type="submit" class="btn-send">Send message</button>
+
+        <!-- Honeypot — hidden from real users, bots will fill it -->
+        <input class="form-honeypot" type="text" name="website" tabindex="-1" autocomplete="off" aria-hidden="true" />
       </form>
       <p class="form-success" id="form-success">Thanks for reaching out! I'll be in touch soon.</p>
     </section>
@@ -92,7 +95,7 @@
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
       </a>
       <script type="text/javascript">
-      { coded = "YdQZEZ22Z@PQ0gd.clQ"
+      { coded = "cCU2hc2@hUHmHCUENW2f.cC6"
         key = "f6oPz1EAn79W2xay4YvFGlIeSwCiqTJVU0B83DhmduZkbXgHKrtNROKsLMQpj5"
         shift=coded.length
         link=""
@@ -126,7 +129,7 @@
       const form = this;
       const submitBtn = form.querySelector('button[type="submit"]');
       const successMsg = document.getElementById('form-success');
-      const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzZSzRaExGR3CnSkDkbJ9eAj8S3dPXme7XehzoR7i2aPCS7XUnxRVUEy2GK73wXZAvF/exec';
+      const SCRIPT_URL = '{{ENV.GOOGLE_SCRIPT_URL}}';
 
       const data = {
         first_name: form.first_name.value.trim(),
@@ -137,6 +140,9 @@
         how_found:  form.how_found.value,
         message:    form.message.value.trim()
       };
+
+      // Honeypot — silently drop submissions from bots
+      if (form.website.value) return;
 
       if (!data.first_name || !data.last_name || !data.email) {
         alert('Please fill in your first name, last name, and email address.');

@@ -1,0 +1,21 @@
+{
+  "name": "an-eye-on-birth",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "build": "node scripts/build.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/JulietteHoisnard/an-eye-on-birth.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/JulietteHoisnard/an-eye-on-birth/issues"
+  },
+  "homepage": "https://github.com/JulietteHoisnard/an-eye-on-birth#readme"
+}
