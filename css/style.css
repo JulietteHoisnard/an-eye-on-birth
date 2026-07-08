@@ -1314,12 +1314,9 @@ img {
 }
 
 .package-card {
-  background: #fff;
-  border: 1px solid #e8e4de;
   border-radius: 16px;
   overflow: hidden;
-  display: flex;
-  flex-direction: column;
+  position: relative;
   cursor: pointer;
   transition: box-shadow 0.25s, transform 0.25s;
 }
@@ -1333,17 +1330,40 @@ img {
   width: 100%;
   aspect-ratio: 3/4;
   object-fit: cover;
+  display: block;
 }
 
-.package-card h3 {
-  padding: 1rem 1rem 1.2rem;
+.package-card-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0,0,0,0.28);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.3s;
+}
+
+.package-card:hover .package-card-overlay {
+  background: rgba(0,0,0,0.42);
+}
+
+.package-card-label {
+  max-width: 80%;
+  color: #fff;
   font-size: 0.9rem;
-  letter-spacing: 0.12em;
+  letter-spacing: 0.18em;
   text-transform: uppercase;
-  font-weight: 400;
+  font-weight: 300;
   text-align: center;
-  color: #2c2c2c;
-  line-height: 1.5;
+  text-shadow: 0 1px 6px rgba(0,0,0,0.4);
+  border: 1px solid rgba(255,255,255,0.6);
+  padding: 0.6rem 1.8rem;
+  transition: border-color 0.3s;
+  border-radius: 999px;
+}
+
+.package-card:hover .package-card-label {
+  border-color: #fff;
 }
 
 /* =============================================
