@@ -1,29 +1,33 @@
 #!/usr/bin/env node
 // Build script — copies site to dist/ and substitutes {{ENV.*}} placeholders
-// from .env into all HTML files.
+// from .env (local) or process.env (CI) into all HTML files.
 
 const fs   = require('fs');
 const path = require('path');
 
-// ── Load .env ────────────────────────────────────────────────────────────────
+// ── Load .env (local dev) or fall back to process.env (CI) ───────────────────
+const env = {};
+
 const envPath = path.join(__dirname, '..', '.env');
-if (!fs.existsSync(envPath)) {
-  console.error('ERROR: .env file not found. Copy .env.example to .env and fill in your values.');
-  process.exit(1);
+if (fs.existsSync(envPath)) {
+  fs.readFileSync(envPath, 'utf8')
+    .split('\n')
+    .forEach(line => {
+      const trimmed = line.trim();
+      if (!trimmed || trimmed.startsWith('#')) return;
+      const idx = trimmed.indexOf('=');
+      if (idx === -1) return;
+      const key = trimmed.slice(0, idx).trim();
+      const val = trimmed.slice(idx + 1).trim();
+      env[key] = val;
+    });
+} else {
+  // In CI, variables are injected via process.env
+  console.log('No .env file found — using process.env (CI mode).');
 }
 
-const env = {};
-fs.readFileSync(envPath, 'utf8')
-  .split('\n')
-  .forEach(line => {
-    const trimmed = line.trim();
-    if (!trimmed || trimmed.startsWith('#')) return;
-    const idx = trimmed.indexOf('=');
-    if (idx === -1) return;
-    const key = trimmed.slice(0, idx).trim();
-    const val = trimmed.slice(idx + 1).trim();
-    env[key] = val;
-  });
+// Merge process.env on top (CI secrets override .env values)
+Object.assign(env, process.env);
 
 // ── Helpers ──────────────────────────────────────────────────────────────────
 const SRC  = path.join(__dirname, '..');
@@ -49,7 +53,7 @@ function copyDir(src, dest) {
 function substitute(content) {
   return content.replace(/\{\{ENV\.(\w+)\}\}/g, (match, key) => {
     if (key in env) return env[key];
-    console.warn(`  WARNING: placeholder {{ENV.${key}}} found but not defined in .env`);
+    console.warn(`  WARNING: placeholder {{ENV.${key}}} found but not defined in .env or process.env`);
     return match;
   });
 }
