@@ -8,6 +8,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="css/style.css" />
+  <script src="https://www.google.com/recaptcha/enterprise.js?render=6Le8RUwtAAAAAG9CNlTM91usu9vCeXC8lRbxmyOH"></script>
 </head>
 <body>
 
@@ -310,7 +311,12 @@
         </label>
         <!-- Honeypot — hidden from real users, bots will fill it -->
         <input class="form-honeypot" type="text" name="website" tabindex="-1" autocomplete="off" aria-hidden="true" />
-        <button type="submit" class="btn-send">Send message</button>       
+        <button type="button" class="btn-send g-recaptcha"
+            data-sitekey="6Le8RUwtAAAAAG9CNlTM91usu9vCeXC8lRbxmyOH"
+            data-callback="onRecaptchaSubmit"
+            data-action="submit">
+          Send message
+        </button>
       </form>
       <p class="form-success" id="form-success">Thanks for reaching out! I'll be in touch soon.</p>
     </section>
@@ -353,12 +359,27 @@
 
   <script src="js/main.js"></script>
   <script>
+    // reCAPTCHA callback — injects the token into a hidden field, then
+    // triggers a real 'submit' event (requestSubmit, unlike form.submit()).
+    function onRecaptchaSubmit(token) {
+      const form = document.getElementById('contact-form');
+      let tokenInput = form.querySelector('input[name="g-recaptcha-response"]');
+      if (!tokenInput) {
+        tokenInput = document.createElement('input');
+        tokenInput.type = 'hidden';
+        tokenInput.name = 'g-recaptcha-response';
+        form.appendChild(tokenInput);
+      }
+      tokenInput.value = token;
+      form.requestSubmit();
+    }
+
     // Submit form data to Google Sheets via Apps Script
     document.getElementById('contact-form').addEventListener('submit', function (e) {
       e.preventDefault();
 
       const form = this;
-      const submitBtn = form.querySelector('button[type="submit"]');
+      const submitBtn = form.querySelector('.btn-send');
       const successMsg = document.getElementById('form-success');
       const SCRIPT_URL = '{{ENV.GOOGLE_SCRIPT_URL}}';
 
