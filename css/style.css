@@ -814,7 +814,6 @@ img {
 .gallery-row {
   display: flex;
   gap: 6px;
-  height: 450px;
 }
 
 /* Each item grows to fill its proportion of the row */
